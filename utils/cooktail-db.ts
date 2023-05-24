@@ -1,7 +1,7 @@
-import { BasicDrink  } from "../model/drinks.ts";
+import { Drink } from "../model/drinks.ts";
 
-async function callEndpoint(endpoint: string) {
-    return fetch("https://www.thecocktaildb.com/api/json/v1/1"+endpoint)
+async function callEndpoint(endpoint: string) {    
+    return await fetch("https://www.thecocktaildb.com/api/json/v1/1/"+endpoint)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
@@ -9,9 +9,31 @@ async function callEndpoint(endpoint: string) {
   
 
 export const cooktaildb = {
-    getList: async (): Promise<BasicDrink[]> => {
-        return ((await callEndpoint("search.php?s")).drinks as BasicDrink[])
+    getList: async (): Promise<Drink[]> => {
+        return (await callEndpoint("search.php?s"))?.drinks as Drink[]
+    },
+    getDrink: async (id: string): Promise<Drink> => {
+        if(id === "random") return await cooktaildb.getRandomDrink()
+        return (await callEndpoint("lookup.php?i="+id))?.drinks[0] as Drink
+    },
+    getRandomDrink: async (): Promise<Drink> => {
+        return (await callEndpoint("random.php"))?.drinks[0] as Drink
+    },
+    getIngredients: (drink: Drink): { strIngredient: string | null; strMeasure: string | null }[] => {
+        const ingredients: { strIngredient: string | null; strMeasure: string | null }[] = [];
+
+        for (let i = 1; i <= 15; i++) {
+          const ingredientKey = `strIngredient${i}`;
+          const measureKey = `strMeasure${i}`;
+      
+          if (drink[ingredientKey] || drink[measureKey]) {
+            ingredients.push({
+              strIngredient: drink[ingredientKey],
+              strMeasure: drink[measureKey]
+            });
+          }
+        }
+      
+        return ingredients;
     }
 }
-
-console.log(await cooktaildb.getList());
