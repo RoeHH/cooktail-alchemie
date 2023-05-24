@@ -10,11 +10,6 @@
     height: 1em;
 }
 
-#img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 body {
     background-color: #1d1f20;
@@ -125,7 +120,6 @@ body {
 /* Body Copy */
 .open-book article {
     line-height: 1.5;
-    height: 75vh;
 }
 
 .open-book article *:not(.chapter-title):not(hr):not(dl) {
@@ -220,12 +214,24 @@ body {
 
 
 
+#img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}    
+
 /*** MEDIA QUERIES ***/
 @media only screen and ( min-width: 50em ) {
 
     .open-book {
         margin: 1em;
         position: relative;
+    }
+
+    
+    #img {
+        width: 100%;
     }
 
     .open-book:before {
@@ -362,4 +368,7 @@ body {
         padding-left: 4em;
     }
 
+    .open-book article {
+        height: 75vh;
+    }
 }

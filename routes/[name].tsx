@@ -43,6 +43,7 @@ export default function Home({ data: drink }: PageProps<Drink>) {
               <div id="spacer"></div>
               <div id="spacer"></div>
               <h2><s>Inhaltsstoffakkumulationen</s><sup>Zutaten</sup></h2>
+              <div id="spacer"></div>
               <div>
                 {cooktaildb.getIngredients(drink).map((ingredient, index) => (
                   <li key={index}><mark class={markColors.at(Math.floor(Math.random() * markColors.length))}>{ingredient.strIngredient}</mark>    {ingredient.strMeasure}</li>
