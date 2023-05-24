@@ -73,7 +73,7 @@ export default function Home({ data: drink }: PageProps<Drink>) {
 
 
 const wordDefinitons = [
-  { word: "cooc k&bull;tail", definition: "Any of various mixed drinks, consisting typically of gin, whiskey, rum, vodka, or brandy, with different admixtures, as vermouth, fruit juices, or flavorings, usually chilled and frequently sweetened." },
+  { word: "cock&bull;tail", definition: "Any of various mixed drinks, consisting typically of gin, whiskey, rum, vodka, or brandy, with different admixtures, as vermouth, fruit juices, or flavorings, usually chilled and frequently sweetened." },
   { word: "drink", definition: `Something that your wives keep count of when you are at a party. For example, after a couple of hours laughing and joking with the men, your wife will slide up to you and say in a very accusing tone of voice "That's your fourth drink, you know".` },
   { word: "bev&bull;er&bull;age", definition: "Any liquid suitable for drinking." },
 ]
