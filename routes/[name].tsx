@@ -1,6 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { JSX } from "preact/jsx-runtime";
+import { Search } from "../components/Search.tsx";
+import HomeIcon from "../islands/HomeIcon.tsx";
 import { Drink } from "../model/drinks.ts";
 import { cooktaildb } from "../utils/cooktail-db.ts";
 
@@ -8,17 +9,18 @@ export const handler: Handlers<Drink> = {
   async GET(req, ctx) {
     const drink = await cooktaildb.getDrink(ctx.params.name);
 
-    if (!drink)
-      return ctx.renderNotFound();
+    if (!drink){
+      return new Response("", {
+        status: 307,
+        headers: { Location: "/random" },
+      });
+    }
     return ctx.render(drink);
   },
 };
 
 export default function Home({ data: drink }: PageProps<Drink>) {
   const wordDefinition = wordDefinitons.at(Math.floor(Math.random() * wordDefinitons.length));
-  function retrun(arg0: JSX.Element) {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <>
@@ -28,13 +30,13 @@ export default function Home({ data: drink }: PageProps<Drink>) {
       </Head>
       <div id="wrapper">
         <div id="container">
-
           <section class="open-book">
             <header>
-              <h1>{drink.strCategory}</h1>
-              <h6>{drink.strAlcoholic}</h6>
+              <h1><HomeIcon /> {drink.strAlcoholic} | {drink.strCategory}</h1>
+              <h6><Search q="" /></h6>
             </header>
             <article>
+              <div>
               <h2 class="chapter-title">{drink.strDrink}</h2>
               <p>
                 {drink.strInstructions}
@@ -46,23 +48,24 @@ export default function Home({ data: drink }: PageProps<Drink>) {
               <div id="spacer"></div>
               <div>
                 {cooktaildb.getIngredients(drink).map((ingredient, index) => (
-                  <li key={index}><mark class={markColors.at(Math.floor(Math.random() * markColors.length))}>{ingredient.strIngredient}</mark>    {ingredient.strMeasure}</li>
+                  <li key={index}><b><mark class={markColors.at(Math.floor(Math.random() * markColors.length))}>{ingredient.strIngredient}</mark></b>    {ingredient.strMeasure}</li>
                 ))}
               </div>
+              </div>
+              <div>
               {drink.strInstructions.length < 1200 ? <>
-                <div id="spacer"></div><img id="img" src={drink.strDrinkThumb} alt="Drink" /><div id="spacer"></div><dl>
+                <div id="spacer"></div><img src={drink.strDrinkThumb} alt="Drink" /><div id="spacer"></div><dl>
                   <dt><strong dangerouslySetInnerHTML={{ __html: wordDefinition?.word || "" }}></strong> -- <em>noun</em></dt>
                   <dd>
                     <div dangerouslySetInnerHTML={{ __html: wordDefinition?.definition || "" }}></div>
                   </dd>
                 </dl>
-              </> : null}
+                </> : null}
+              </div>
             </article>
             <footer>
-              <ol id="page-numbers">
-                <li>{drink.idDrink}</li>
-                <li>{Number(drink.idDrink) + 1}</li>
-              </ol>
+                <p>{drink.idDrink}</p>
+                <p>{Number(drink.idDrink) + 1}</p>
             </footer>
           </section>
 

@@ -30,6 +30,25 @@ body {
     width: 100%;
 }
 
+.alphabet{
+    font-size: 1.2em;
+    text-align: center;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.alphabet a{
+    background: none !important;
+}
+
+.alphabet b{
+    font-size: 1.5em;
+}
+
+#page2 {
+    grid-column-start: 2;
+}
 
 
 /*** OPEN BOOK ***/
@@ -65,8 +84,17 @@ body {
     margin: 0;
 }
 
-.open-book header * {
+.open-book header h2 {
     font-size: 0.75em;
+    text-transform: uppercase;
+}
+
+.open-book header h6 {
+    font: normal;
+    letter-spacing: normal;
+}
+
+.open-book header h6 form input {
     text-transform: uppercase;
 }
 
@@ -74,16 +102,6 @@ body {
     padding-top: 1em;
 }
 
-.open-book footer #page-numbers {
-    display: none;
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-
-.open-book footer #page-numbers > li:last-child {
-    text-align: right;
-}
 
 /* Chapter Title */
 .open-book .chapter-title {
@@ -96,6 +114,7 @@ body {
     position: relative;
     text-align: center;
     text-transform: uppercase;
+    height: fit-content;
 }
 
 .open-book .chapter-title:before,
@@ -104,7 +123,7 @@ body {
     border-width: 0.05em 0;
     bottom: calc((0.125em / 2) * 3);
     content: '';
-    height: 0.15em;
+    height: 0.1em;
     position: absolute;
     width: calc(50% - (1em / 2));
 }
@@ -214,7 +233,7 @@ body {
 
 
 
-#img {
+img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -230,8 +249,13 @@ body {
     }
 
     
-    #img {
+    img {
         width: 100%;
+    }
+
+    #splashImg {
+        border-radius: 60px;
+        filter: grayscale(20%);
     }
 
     .open-book:before {
@@ -259,8 +283,12 @@ body {
     }
 
     .open-book > * {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-auto-flow: column;
         column-count: 2;
-        column-gap: 6em;
+        grid-gap: 6em;
         position: relative;
         z-index: 1;
     }
@@ -276,7 +304,7 @@ body {
         height: 2em;
         position: absolute;
         z-index: -1;
-        width: calc(50% + 2em);
+        width: calc(50% + 3em);
     }
 
     .open-book header:before,
@@ -310,7 +338,7 @@ body {
 
     .open-book header:before,
     .open-book footer:before {
-        right: 50%;
+        right: 44.5%;
     }
 
     .open-book header:before {
@@ -319,7 +347,7 @@ body {
 
     .open-book header:after,
     .open-book footer:after {
-        left: 50%;
+        left: 55.5%;
     }
 
     .open-book header:after {

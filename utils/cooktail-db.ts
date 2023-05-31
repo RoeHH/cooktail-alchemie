@@ -35,5 +35,10 @@ export const cooktaildb = {
         }
       
         return ingredients;
+    },
+    search: async (query: string): Promise<Drink[]> => {
+      if(query === "") return await cooktaildb.getList()
+      if(query.length === 1) return (await callEndpoint("search.php?f="+query))?.drinks as Drink[]
+      return (await callEndpoint("search.php?s="+query))?.drinks as Drink[]
     }
 }
