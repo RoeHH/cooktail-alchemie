@@ -240,6 +240,14 @@ img {
     width: 40%;
 }    
 
+#splashImg {
+    display: none;
+}
+
+footer {
+    visibility: hidden;
+}
+
 /*** MEDIA QUERIES ***/
 @media only screen and ( min-width: 50em ) {
 
@@ -398,5 +406,9 @@ img {
 
     .open-book article {
         height: 75vh;
+    }
+
+    footer {
+        visibility: visible;
     }
 }
