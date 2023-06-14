@@ -264,6 +264,7 @@ footer {
     #splashImg {
         border-radius: 60px;
         filter: grayscale(20%);
+        display: block;
     }
 
     .open-book:before {
